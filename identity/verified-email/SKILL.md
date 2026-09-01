@@ -8,7 +8,7 @@ description: Provides a complete workflow for implementing verified email retrie
 license: Complete terms in LICENSE.txt
 metadata:
   author: Google LLC
-  last-updated: '2026-07-02'
+  last-updated: '2026-08-19'
   keywords:
   - implementation
   - Android
@@ -117,6 +117,8 @@ actions:
 - Leave a TODO for developers to handle the app's server-side validation and parsing.
 - Direct users to the home screen after API call success and show a snackbar with user details for reference purpose only.
 
+## Overview
+
 This guide describes how to implement verified email retrieval using the
 [Digital Credentials Verifier API](references/android/identity/digital-credentials/credential-verifier.md) through an [OpenID for Verifiable
 Presentations (OpenID4VP)](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html) request.
@@ -130,8 +132,8 @@ Manager:
 
 ```kotlin
 dependencies {
-    implementation("androidx.credentials:credentials:1.7.0-alpha02")
-    implementation("androidx.credentials:credentials-play-services-auth:1.7.0-alpha02")
+    implementation("androidx.credentials:credentials:1.7.0-alpha03")
+    implementation("androidx.credentials:credentials-play-services-auth:1.7.0-alpha03")
 }
 ```
 
@@ -139,8 +141,8 @@ dependencies {
 
 ```groovy
 dependencies {
-    implementation "androidx.credentials:credentials:1.7.0-alpha02"
-    implementation "androidx.credentials:credentials-play-services-auth:1.7.0-alpha02"
+    implementation "androidx.credentials:credentials:1.7.0-alpha03"
+    implementation "androidx.credentials:credentials-play-services-auth:1.7.0-alpha03"
 }
 ```
 
@@ -304,12 +306,15 @@ additional metadata as well along with verified email:
     /*
     // Example of the raw JSON response from credential.credentialJson:
     {
-      "vp_token": {
-        // This key matches the 'id' you set in your dcql_query
-        "user_info_query": [
-          // The SD-JWT string (Issuer JWT ~ Disclosures ~ Key Binding JWT)
-          "eyJhbGciOiJ...~WyI...IiwgImVtYWlsIiwgInVzZXJAZXhhbXBsZS5jb20iXQ~...~eyJhbGciOiJ..."
-        ]
+      "protocol": "openid4vp-v1-unsigned",
+      "data": {
+        "vp_token": {
+          // This key matches the 'id' you set in your dcql_query
+          "user_info_query": [
+            // The SD-JWT string (Issuer JWT ~ Disclosures ~ Key Binding JWT)
+            "eyJhbGciOiJ...~WyI...IiwgImVtYWlsIiwgInVzZXJAZXhhbXBsZS5jb20iXQ~...~eyJhbGciOiJ..."
+          ]
+        }
       }
     }
 
